@@ -18,4 +18,4 @@ That's it! You have your local PHP setup using Docker
 5. install aws cli (for aws infrastructure testing)
 6. install dropbox (for project documentation) (requires dropbox credentials)
 7. install wordpress-cli (for wordpress automation)
-
+8. follow the todo list. 
