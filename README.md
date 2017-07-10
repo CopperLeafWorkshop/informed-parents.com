@@ -17,6 +17,6 @@ That's it! You have your local PHP setup using Docker
 4. install terraform (for aws infrastructure creation) (requires aws credentials)
 5. install aws cli (for aws infrastructure testing)
 6. install dropbox (for project documentation) (requires dropbox credentials)
-7. install wordpress-cli (for wordpress automation)
-8. install mariadb-client
+7. install php (for the wordpress-cli)
+8. install wordpress-cli (for wordpress automation)
 n. follow the todo list. 
