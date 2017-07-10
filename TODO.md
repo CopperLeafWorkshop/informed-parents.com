@@ -8,7 +8,7 @@
 - [x] create wordpress db with a script  
   *create the wordpress db on rds* 
 - [x] configure container to serve wordpress  
-  *just hook up the generic container with efs as /var/www or whatever.*
+  *just hook up the generic nginx+php containers with wordpress site mounted at /var/www/
 - [ ] create efs with terraform script  
   *somewhere to put the website files so the container can be more generic*
 - [ ] deploy wordpress site to efs  
