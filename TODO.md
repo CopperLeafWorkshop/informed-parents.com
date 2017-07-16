@@ -17,11 +17,12 @@
   - create security group - for containers to use 
  
 
-[ ] create ECS cluster with terraform
-  - create ec2 instance based on aws-container-ami optimized for my region
-  - create ecs cluster - to define what ec2 instances are available
-  - create ecs task - to define what to run on the cluster
-  - schedule the task - to always be running 
+[/] create ECS cluster with terraform
+  [x] create ec2 instance based on aws-container-ami optimized for my region
+    -ff15039b
+  [x] create ecs cluster - to define what ec2 instances are available
+  [ ] crete ecs task - to define what to run on the cluster
+  [ ] schedule the task - to always be runnin 
 
 [ ] get my containers running in ECS
     // specifically get MY containers running in that ecs cluster

@@ -1,10 +1,15 @@
 
+resource "aws_ecs_cluster" "ecs_cluster" {
+    name = "shared_cluster"
+}
 # data "aws_ecs_cluster" "ecs_cluster" {
 #   cluster_name = "shared_cluster"
 # }
+data "template_file" "user_data" {
+  template = "${file("userdata.sh")}"
+}
 
-
-resource "aws_iam_role" "ecs_container_agent_role" {
+resource "aws_iam_role" "ecs_ec2_role" {
   name_prefix        = "inpa_ecs_container_agent_role"
   assume_role_policy = <<EOF
 {
@@ -13,7 +18,8 @@ resource "aws_iam_role" "ecs_container_agent_role" {
     {
       "Action": "sts:AssumeRole",
       "Principal": {
-        "Service": "ec2.amazonaws.com"
+        "Service": "ec2.amazonaws.com",
+        "Service": "ecs.amazonaws.com"
       },
       "Effect": "Allow",
       "Sid": ""
@@ -25,7 +31,7 @@ EOF
 
 resource "aws_iam_role_policy" "ecs_container_agent_role_policy" {
     name_prefix = "inpa_ecs_container_agent_role_policy"
-    role        = "${aws_iam_role.ecs_container_agent_role.id}"
+    role        = "${aws_iam_role.ecs_ec2_role.id}"
     policy      = <<EOF
 {
   "Version": "2012-10-17",
@@ -54,27 +60,9 @@ resource "aws_iam_role_policy" "ecs_container_agent_role_policy" {
 EOF
 }
 
-resource "aws_iam_role" "ecs_service_scheduler_role" {
-  name_prefix        = "inpa_ecs_service_scheduler_role"
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "",
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "ecs.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-EOF
-}
 resource "aws_iam_role_policy" "ecs_service_scheduler_role_policy" {
     name_prefix = "inpa_ecs_service_scheduler_role_policy"
-    role = "${aws_iam_role.ecs_service_scheduler_role.id}"
+    role = "${aws_iam_role.ecs_ec2_role.id}"
     policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -95,6 +83,11 @@ resource "aws_iam_role_policy" "ecs_service_scheduler_role_policy" {
   ]
 }
 EOF
+}
+
+resource "aws_iam_instance_profile" "ecs_ec2_profile" {
+  name  = "test_profile"
+  role = "${aws_iam_role.ecs_ec2_role.name}"
 }
 
 
@@ -126,5 +119,25 @@ resource "aws_security_group" "ecs_cluster_security_group" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags {
+    ClusterName = "shared-cluster"
+  }
+}
+
+resource "aws_instance" "ecs_instance" {
+  count = "2"   
+  key_name                    = "${aws_key_pair.container_access_key_pair.key_name}"
+  ami                         = "ami-ff15039b"
+  instance_type               = "t2.micro"
+  vpc_security_group_ids      = ["${aws_security_group.ecs_cluster_security_group.id}"]
+  user_data                   = "${data.template_file.user_data.rendered}"
+  iam_instance_profile        = "${aws_iam_instance_profile.ecs_ec2_profile.name}"
+  associate_public_ip_address = true
+
+  tags {
+    Name        = "${format("shared-cluster-node-%d", count.index + 1)}"
+    ClusterName = "shared-cluster"
   }
 }
