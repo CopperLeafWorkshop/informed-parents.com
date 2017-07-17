@@ -129,7 +129,7 @@ resource "aws_security_group" "ecs_cluster_security_group" {
 resource "aws_instance" "ecs_instance" {
   count = "2"   
   key_name                    = "${aws_key_pair.container_access_key_pair.key_name}"
-  ami                         = "ami-ff15039b"
+  ami                         = "ami-57d9cd2e"
   instance_type               = "t2.micro"
   vpc_security_group_ids      = ["${aws_security_group.ecs_cluster_security_group.id}"]
   user_data                   = "${data.template_file.user_data.rendered}"

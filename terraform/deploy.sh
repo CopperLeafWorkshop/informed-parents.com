@@ -14,4 +14,9 @@ if [ ! -f informed-parents-uswest2.pub ]; then
 	ssh-keygen -y -f informed-parents-uswest2.pem  > informed-parents-uswest2.pub
 fi
 
-terraform apply -var 'db_password=$1'
+terraform plan -var 'db_password=$1'
+read -p "Apply? (y/n) : " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    terraform apply -var 'db_password=$1'
+fi
