@@ -2,7 +2,6 @@ provider "aws" {
   region = "us-west-2"
 }
 
-
 resource "aws_s3_bucket" "informed_parents_s3" {
   bucket = "copperleafsoftwaresolutions.informed-parents.org"
   acl    = "private"
