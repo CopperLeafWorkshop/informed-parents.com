@@ -12,11 +12,14 @@ That's it! You have your local PHP setup using Docker
 --------------------------------
 ## Project Setup Instructions
 1. Start up linux machine (ubuntu vm works.)
-2. install & setup git (to get this repo.) (requires github credentials)
-3. install docker (for nginx,php containers)
-4. install terraform (for aws infrastructure creation) (requires aws credentials)
-5. install aws cli (for aws infrastructure testing)
-6. install dropbox (for project documentation) (requires dropbox credentials)
-7. install php (for the wordpress-cli)
-8. install wordpress-cli (for wordpress automation)
+Install:
+ - git (to get this repo.) (requires github credentials)
+ - docker (for nginx,php containers)
+ - terraform (for aws infrastructure creation) (requires aws credentials)
+ - aws cli (for aws infrastructure testing)
+ - dropbox (for project documentation) (requires dropbox credentials)
+ - php : apt install php (for the wordpress-cli)
+ - wordpress-cli (for wordpress automation)
+ - python v3 : apt install python3-pip
+ - container-transform : pip3 install container-transform  
 n. follow the todo list. 

@@ -13,6 +13,7 @@ resource "aws_db_instance" "informed_parents_db" {
   storage_type             = "gp2"
   username                 = "informed_parents"
   vpc_security_group_ids   = ["${aws_security_group.rds_security_group.id}"]
+  skip_final_snapshot      = true
 }
 
 
