@@ -19,8 +19,10 @@ resource "aws_autoscaling_group" "ecs_ec2_autoscaling_group" {
   min_size             = 1
   max_size             = 10
 
-  tags {
-    ClusterName = "shared_cluster"
+   tag {
+    key                 = "ClusterName"
+    value               = "shared_cluster"
+    propagate_at_launch = true
   }
 }
 
@@ -115,8 +117,7 @@ resource "aws_iam_role" "ecs_ec2_role" {
     {
       "Action": "sts:AssumeRole",
       "Principal": {
-        "Service": "ecs.amazonaws.com",
-        "Service": "ecr.amazonaws.com"
+        "Service": "ec2.amazonaws.com"
       },
       "Effect": "Allow",
       "Sid": ""
@@ -134,24 +135,17 @@ resource "aws_iam_role_policy" "ecs_ec2_role_policy" {
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Effect": "Allow",
-            "Action": [
-                "ecs:CreateCluster",
-                "ecs:DeregisterContainerInstance",
-                "ecs:DiscoverPollEndpoint",
-                "ecs:Poll",
-                "ecs:RegisterContainerInstance",
-                "ecs:StartTelemetrySession",
-                "ecs:UpdateContainerInstancesState",
-                "ecs:Submit*",
-                "ecr:GetAuthorizationToken",
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:GetDownloadUrlForLayer",
-                "ecr:BatchGetImage",
-                "logs:CreateLogStream",
-                "logs:PutLogEvents"
-            ],
-            "Resource": "*"
+          "Effect": "Allow",
+          "Action": [
+            "ec2:AuthorizeSecurityGroupIngress",
+            "ec2:Describe*",
+            "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
+            "elasticloadbalancing:DeregisterTargets",
+            "elasticloadbalancing:Describe*",
+            "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
+            "elasticloadbalancing:RegisterTargets"
+          ],
+          "Resource": "*"
         }
     ]
 }

@@ -75,7 +75,7 @@ resource "aws_iam_role" "ecs_service_scheduler_role" {
     {
       "Action": "sts:AssumeRole",
       "Principal": {
-        "Service": "ec2.amazonaws.com"
+        "Service": "ecs.amazonaws.com"
       },
       "Effect": "Allow",
       "Sid": ""
@@ -91,19 +91,26 @@ resource "aws_iam_role_policy" "ecs_service_scheduler_role_policy" {
 {
   "Version": "2012-10-17",
   "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:AuthorizeSecurityGroupIngress",
-        "ec2:Describe*",
-        "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
-        "elasticloadbalancing:DeregisterTargets",
-        "elasticloadbalancing:Describe*",
-        "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
-        "elasticloadbalancing:RegisterTargets"
-      ],
-      "Resource": "*"
-    }
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecs:CreateCluster",
+                "ecs:DeregisterContainerInstance",
+                "ecs:DiscoverPollEndpoint",
+                "ecs:Poll",
+                "ecs:RegisterContainerInstance",
+                "ecs:StartTelemetrySession",
+                "ecs:UpdateContainerInstancesState",
+                "ecs:Submit*",
+                "ecr:GetAuthorizationToken",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "*"
+        }
   ]
 }
 EOF
