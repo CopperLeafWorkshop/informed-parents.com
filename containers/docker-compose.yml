@@ -2,36 +2,20 @@ version: '2'
 
 services:
     web:
-        image: nginx:latest
+        image: 379709885387.dkr.ecr.us-west-2.amazonaws.com/inpa-nginx:latest
         ports:
             - "80:80"
-        volumes:
-            - ../wordpress/site:/www
-            - ./site.conf:/etc/nginx/conf.d/default.conf
         networks:
             - code-network
-        resources:
-            limits:
-                cpus: '0.2'
-                memory: 256M
-            reservations:
-                cpus: '0.2'
-                memory: 128M
+        cpu_shares: 100
+        mem_limit: 128000000
+
     php:
-        build: 
-            context: .
-            dockerfile: dockerfile-php7fpm-mysqli
-        volumes:
-            - ../wordpress/site:/www
+        image: 379709885387.dkr.ecr.us-west-2.amazonaws.com/inpa-wp:latest 
         networks:
             - code-network
-        resources:
-            limits:
-                cpus: '0.2'
-                memory: 256M
-            reservations:
-                cpus: '0.2'
-                memory: 128M
+        cpu_shares: 100
+        mem_limit: 256000000
 
 networks:
     code-network:

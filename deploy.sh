@@ -4,23 +4,31 @@
 #
 
 ###
-# 1. Create the Infrastructure
+# Create the database 
 #
-cd terraform
+cd terraform-db
 ./deploy.sh $1
 db_address="$(terraform output db_address)"
 cd ..
 
 ###
-# 2. Create the wordpress ite
+# Create the wordpress site
 #
 cd wordpress
 ./deploy.sh "$db_address" $1 $2 $3
 cd ..
 
 ###
-# 3. Configure container to user wordpress site 
+# create the container to use the wordpress site 
 # 
 cd containers
 ./deploy.sh
 cd..
+
+###
+# 1. Create the Infrastructure that uses the containers
+#
+cd terraform-ecs
+./deploy.sh $1
+cd ..
+

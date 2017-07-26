@@ -17,21 +17,17 @@
   - create security group - for containers to use 
  
 
-[/] create ECS cluster with terraform
+[x] create ECS cluster with terraform
   [x] create ec2 instance based on aws-container-ami optimized for my region
     -ff15039b
   [x] create ecs cluster - to define what ec2 instances are available
-  [ ] crete ecs task - to define what to run on the cluster
-  [ ] schedule the task - to always be runnin 
+  [x] crete ecs task - to define what to run on the cluster
+  [x] schedule the task - to always be runnin 
 
-[ ] get my containers running in ECS
-    // specifically get MY containers running in that ecs cluster
+[] package wp into the wp container, and test locally it works
+[] package the site.config into the nginx container, and an index.html, and test locally it works
+[] publish those containers to ecr
+[] test those containers in ecs
 
 [ ] setup cloudflare dns,cdn
 
-[ ] create efs with terraform script
-    // somewhere to put the website files so the container can be more generic
-[ ] deploy wordpress wp-content to efs
-    // that scriptable wordpress site just needs to be transferred to the efs we created
-[ ] configure container to mount efs and serve wordpress
-    // just hook up the generic container with efs as /var/www or whatever.

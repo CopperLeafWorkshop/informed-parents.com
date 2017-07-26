@@ -1,0 +1,27 @@
+[
+    {
+      "name": "nginx",
+      "image": "379709885387.dkr.ecr.us-west-2.amazonaws.com/inpa-nginx:latest",
+      "memory": 120,
+      "cpu": 100,
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80
+        }
+      ],
+      "links": [
+        "php"
+      ]
+    },
+    {
+      "name": "php",
+      "image": "379709885387.dkr.ecr.us-west-2.amazonaws.com/inpa-wp:latest",
+      "memory": 120,
+      "cpu": 100,
+      "essential": true
+      ]
+    }
+  ]
+

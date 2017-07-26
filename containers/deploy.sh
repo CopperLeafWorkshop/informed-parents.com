@@ -6,3 +6,10 @@
 
 # Push the image using the docker push command.
 #$ docker push aws_account_id.dkr.ecr.region.amazonaws.com/my-web-app
+
+docker build -t "379709885387.dkr.ecr.us-west-2.amazonaws.com/inpa-wp" -f ./dockerfile-php .
+docker push  379709885387.dkr.ecr.us-west-2.amazonaws.com/inpa-wp
+
+docker build -t "379709885387.dkr.ecr.us-west-2.amazonaws.com/inpa-nginx" -f ./dockerfile-nginx .
+docker push  379709885387.dkr.ecr.us-west-2.amazonaws.com/inpa-nginx
+
