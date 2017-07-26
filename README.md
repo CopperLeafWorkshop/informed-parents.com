@@ -16,6 +16,7 @@ Install:
  - git (to get this repo.) (requires github credentials)
  - docker (for nginx,php containers)
  - terraform (for aws infrastructure creation) (requires aws credentials)
+ - graphviz (for generating graphs of terraform infrastructure)
  - aws cli (for aws infrastructure testing)
  - dropbox (for project documentation) (requires dropbox credentials)
  - php : apt install php (for the wordpress-cli)

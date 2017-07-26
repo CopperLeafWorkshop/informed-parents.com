@@ -10,7 +10,10 @@ resource "aws_ecs_service" "ecs_service" {
   task_definition = "${aws_ecs_task_definition.ecs_task_definition.arn}"
   desired_count   = 2
   iam_role        = "${aws_iam_role.ecs_service_scheduler_role.arn}"
-  depends_on      = ["aws_iam_role_policy.ecs_service_scheduler_role_policy"]
+  depends_on      = [
+    "aws_iam_role_policy.ecs_service_scheduler_role_policy",
+    "aws_alb.ecs_service_alb"
+  ]
 
   placement_strategy {
     type  = "binpack"
@@ -63,11 +66,11 @@ resource "aws_alb_target_group" "ecs_service_alb_target_group" {
   protocol = "HTTP"
   vpc_id   = "${aws_default_vpc.default_vpc.id}"
   health_check {
-        healthy_threshold   = 2
+        healthy_threshold   = 1
         unhealthy_threshold = 2
         timeout             = 5
-        path                = "/ping"
-        interval            = 10
+        path                = "/index.html"
+        interval            = 60
     }
 }
 

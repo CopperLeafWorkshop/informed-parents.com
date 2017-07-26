@@ -9,9 +9,9 @@ mysql --host=$1 --user=informed_parents --password=$2 -v --port=5432 -e "create 
 mysql --host=$1 --user=informed_parents --password=$2 -v --port=5432 -e "grant all on informed_parents_db.* to 'site_user' identified by '$3'" 
 
 # cleanup any previous builds
-rm -rf ./site
-mkdir site
-cd site
+rm -rf ../containers/site
+mkdir ../containers/site
+cd ../containers/site
 
 # build the site
 wp core download

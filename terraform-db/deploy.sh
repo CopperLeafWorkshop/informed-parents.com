@@ -14,3 +14,4 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
     terraform apply -var 'db_password=$1'
 fi
+terraform graph | dot -Tpng > graph-db.png

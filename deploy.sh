@@ -29,6 +29,6 @@ cd..
 # 1. Create the Infrastructure that uses the containers
 #
 cd terraform-ecs
-./deploy.sh $1
+./deploy.sh
 cd ..
 
