@@ -6,7 +6,9 @@
 ###
 # Run Terraform
 #
-
+echo "0 $0"
+echo "1 $1"
+echo "2 $2"
 terraform plan -var 'db_password=$1'
 read -p "Apply? (y/n) : " -n 1 -r
 echo ""

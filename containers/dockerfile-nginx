@@ -3,6 +3,6 @@ FROM nginx:latest
 RUN rm /etc/nginx/conf.d/default.conf
 
 COPY nginx-files/site.conf /etc/nginx/conf.d/default.conf
-COPY nginx-files/index.html /www/index.html
 
+COPY site/ /www/
 

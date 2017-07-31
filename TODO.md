@@ -24,10 +24,12 @@
   [x] crete ecs task - to define what to run on the cluster
   [x] schedule the task - to always be runnin 
 
-[] package wp into the wp container, and test locally it works
-[] package the site.config into the nginx container, and an index.html, and test locally it works
-[] publish those containers to ecr
-[] test those containers in ecs
+[20170730] package wp into the wp container, and test locally it works
+[20170730] package the site.config into the nginx container, and an index.html, and test locally it works
+[]20170730 publish those containers to ecr
+[20170730] test those containers in ecs
 
+[] fix ecs so that nginx doesnt need to bind to host port 80
+[] setup DNS 
 [ ] setup cloudflare dns,cdn
 
