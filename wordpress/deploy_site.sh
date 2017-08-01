@@ -8,6 +8,9 @@ rm -rf ../containers/site
 mkdir ../containers/site
 cd ../containers/site
 
+# Status page for load balancer
+echo "<?php echo \"1\"; ?>" > status.php
+
 # build the site
 wp core download
 wp core config --dbname=informed_parents_db --dbuser=site_user --dbpass=$3 --dbhost=$1:5432 --dbprefix=wp_

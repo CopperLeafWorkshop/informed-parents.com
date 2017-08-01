@@ -37,7 +37,7 @@ resource "aws_ecs_service" "ecs_service" {
  */
 
 resource "aws_ecs_task_definition" "ecs_task_definition" {
-  family                = "inpa_ecs_task_definition_201707301120"
+  family                = "inpa_ecs_task_definition_201707311026"
   container_definitions = "${file("task-definitions/task.json")}"
 
   placement_constraints {
@@ -69,7 +69,7 @@ resource "aws_alb_target_group" "ecs_service_alb_target_group" {
         healthy_threshold   = 2
         unhealthy_threshold = 2
         timeout             = 5
-        path                = "/index.html"
+        path                = "/status.php"
         interval            = 120
     }
 }
