@@ -14,4 +14,4 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
     terraform apply 
 fi
-terraform graph | dot -Tpng > graph-ecs.png
+terraform graph | dot -Tpng > ../graph-ecs.png

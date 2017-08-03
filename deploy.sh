@@ -6,6 +6,8 @@
 ###
 # Create the database 
 #
+echo "1. Terraform-rds"
+
 cd terraform-db
 ./deploy.sh $1
 db_address="$(terraform output db_address)"
@@ -14,9 +16,11 @@ cd ..
 ###
 # Create the wordpress site
 #
+echo "2. Create Wordpress Site"
+
 cd wordpress
 # Prompt asking if db should be deployed
-read -p "Create DB? (y/n): " -n 1 -r
+read -p "Create new Wordpress DB? (y/n): " -n 1 -r
 echo ""
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
@@ -29,19 +33,29 @@ cd ..
 ###
 # create the container to use the wordpress site 
 # 
+echo "3. Create Container Images"
+
 cd containers
-./build.sh
-./authenticate.sh
-# Enter the authentication command here
-read -p "Authentication Hash: " -r hash
-docker login -u AWS -p $hash https://379709885387.dkr.ecr.us-west-2.amazonaws.com
 ./deploy.sh
 cd ..
 
 ###
-# 1. Create the Infrastructure that uses the containers
+# Create the Infrastructure that uses the containers
 #
+echo "4. Terraform-ecs"
+
 cd terraform-ecs
 ./deploy.sh
 cd ..
 
+
+###
+# Create the dns entries 
+#
+echo "5. Terraform-dns"
+
+cd terraform-dns
+./deploy.sh
+cd ..
+
+echo "Complete."
