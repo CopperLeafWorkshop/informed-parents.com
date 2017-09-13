@@ -37,7 +37,7 @@ resource "aws_ecs_service" "ecs_service" {
  */
 
 resource "aws_ecs_task_definition" "ecs_task_definition" {
-  family                = "inpa_ecs_task_definition_201707311026"
+  family                = "inpa_ecs_task_definition_201709121125"
   container_definitions = "${file("task-definitions/task.json")}"
 
   placement_constraints {

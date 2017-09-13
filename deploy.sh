@@ -1,17 +1,7 @@
 #!/bin/bash
 #
-# deploy.sh <rds_admin_db_password> <wordpress_db_password> <wordpress_admin_password>
+# deploy.sh <rds_endpoint> <rds_admin_db_password> <wordpress_db_password> <wordpress_admin_password>
 #
-
-###
-# Create the database 
-#
-echo "1. Terraform-rds"
-
-cd terraform-db
-./deploy.sh $1
-db_address="$(terraform output db_address)"
-cd ..
 
 ###
 # Create the wordpress site
@@ -24,9 +14,9 @@ read -p "Create new Wordpress DB? (y/n): " -n 1 -r
 echo ""
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-  ./deploy_db.sh "$db_address" $1 $2 $3
+  ./deploy_db.sh $1 $2 $3 
 fi
-./deploy_site.sh "$db_address" $1 $2 $3
+./deploy_site.sh $1 $2 $3 $4
 
 cd ..
 
